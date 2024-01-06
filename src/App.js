@@ -98,7 +98,7 @@ export default function Game() {
     setMovesSortAscend(!movesSortAscend);
   }
 
-  const displayedMoves = movesSortAscend ? moves : moves.reverse();
+  const displayedMoves = movesSortAscend ? [...moves] : [...moves].reverse();
 
   return (
     <div className="game">
