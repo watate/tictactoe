@@ -8,14 +8,17 @@ function SquareRed({ value, onSquareClick }) {
   return <button className="square-highlight" onClick={onSquareClick}>{value}</button>;
 }
 
-function Board({ xIsNext, squares, onPlay }) {
+function Board({ xIsNext, squares, onPlay, currentMove}) {
   const winner = calculateWinner(squares); //this now returns winning line
   let status;
   if (winner) {
     status = "Winner: " + squares[winner[0]];
-  } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
+  } else if (currentMove === 9) {
+    status = "Draw";
   }
+  else {
+    status = "Next player: " + (xIsNext ? "X" : "O");
+  };
 
 
   function handleClick(i) {
@@ -100,7 +103,7 @@ export default function Game() {
   return (
     <div className="game">
       <div className="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} currentMove={currentMove} />
       </div>
       <div className="game-info">
         <button onClick={handleAscendClick}>{movesSortAscend ? "Switch: Descending order" : "Switch: Ascending order"}</button>
